@@ -175,3 +175,4 @@ cadastra produto pelo celular, se quiser.
 | Erro ao enviar imagem | O bucket `midia` não existe — rode o `schema.sql` de novo. |
 | Imagem não carrega depois de enviada | Reinicie o `npm run dev`: o domínio do Supabase é lido na inicialização. Na Vercel, faça **Redeploy**. |
 | Na Vercel o site sobe vazio | Variáveis faltando, com espaço no fim, ou adicionadas sem **Redeploy**. Veja o passo 6.4. |
+| **"This page couldn't load / A server error occurred"** | As duas variáveis não chegaram ao deploy. O build passa mesmo sem elas, por isso a Vercel não acusa erro — a falha só aparece ao abrir a página. Confira em **Logs** na Vercel: a mensagem diz qual variável falta. Adicione no passo 6.3 e **faça Redeploy**. |
