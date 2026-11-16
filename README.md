@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ZH Informática — site + painel administrativo
 
-## Getting Started
+Site institucional e catálogo da ZH Informática (Faxinal dos Guedes/SC), com
+área administrativa para cadastrar banners e produtos. **Todos os botões de
+compra levam para o WhatsApp — o site não processa pagamentos.**
 
-First, run the development server:
+Stack: Next.js 16 (App Router) · TypeScript · Tailwind CSS 4 · Supabase
+(banco, autenticação e armazenamento de imagens).
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 1. Criar o projeto no Supabase
+
+1. Acesse <https://supabase.com> e crie uma conta (plano gratuito serve).
+2. Clique em **New project**, escolha um nome (ex.: `zh-informatica`), defina
+   uma senha para o banco e selecione a região **South America (São Paulo)**.
+3. Aguarde o provisionamento (1–2 minutos).
+
+## 2. Criar as tabelas
+
+1. No painel do Supabase, abra **SQL Editor** → **New query**.
+2. Cole todo o conteúdo de [`supabase/schema.sql`](supabase/schema.sql) e
+   clique em **Run**.
+
+Isso cria as tabelas `produtos`, `banners`, `categorias` e `configuracoes`,
+aplica as regras de segurança (leitura pública, escrita só para administradores
+logados), cria o bucket de imagens `midia` e já insere as categorias iniciais e
+os dados de contato da loja.
+
+## 3. Criar o usuário administrador
+
+1. No Supabase, vá em **Authentication** → **Users** → **Add user** →
+   **Create new user**.
+2. Informe o e-mail e a senha do responsável pela loja.
+3. Marque **Auto Confirm User** para que o login funcione de imediato.
+
+> Repita o passo para cada pessoa que precisar acessar o painel. Não existe
+> cadastro público: só quem for criado aqui consegue entrar.
+
+## 4. Configurar as credenciais
+
+No Supabase, abra **Project Settings** → **API** e copie os dois valores para o
+arquivo `.env.local` na raiz do projeto:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://SEU-PROJETO.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sua-chave-anon-publica
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A chave `anon` é pública por natureza — a proteção real vem das regras de
+segurança (RLS) criadas no passo 2. **Nunca** use a chave `service_role` aqui.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 5. Rodar localmente
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+- Site: <http://localhost:3000>
+- Painel: <http://localhost:3000/admin>
 
-To learn more about Next.js, take a look at the following resources:
+## 6. Publicar na Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Suba o projeto para um repositório no GitHub.
+2. Em <https://vercel.com>, clique em **Add New → Project** e importe o
+   repositório.
+3. Em **Environment Variables**, adicione as mesmas duas variáveis do
+   `.env.local`.
+4. Clique em **Deploy**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Para usar um domínio próprio (ex.: `zhinformatica.com.br`), vá em
+**Settings → Domains** no projeto da Vercel e siga as instruções de DNS.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Usando o painel administrativo
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Acesse `/admin` e entre com o e-mail e a senha criados no passo 3.
+
+| Seção | O que faz |
+| --- | --- |
+| **Painel** | Resumo de quantos produtos, banners e categorias existem. |
+| **Produtos** | Cadastra, edita e exclui produtos com foto, preço e categoria. |
+| **Banners** | Gerencia as imagens do carrossel da página inicial. |
+| **Categorias** | Cria e ordena as categorias do menu. |
+| **Configurações** | Envia a **logo** e atualiza WhatsApp, endereço, horário, Instagram e e-mail. |
+
+### Detalhes importantes
+
+- **Preço é opcional.** Deixando o campo vazio, o card exibe
+  "Consulte o valor" — útil para produtos com preço que muda com frequência.
+- **Produto oculto.** Desligue "Visível no site" para tirar um produto do ar
+  sem perder o cadastro.
+- **Destaque.** Produtos marcados como destaque aparecem na página inicial. Se
+  nenhum estiver marcado, a home mostra os cadastrados mais recentes.
+- **Ordem.** Número menor aparece primeiro na listagem.
+- **Banners.** Tamanho recomendado: **1600×600 px**. O campo "Link ao clicar"
+  aceita caminhos internos, como `/produtos?categoria=gamer`.
+- **Imagens.** Até 5 MB por arquivo, em JPG, PNG ou WEBP.
+- **Logo.** Enviada em Configurações. Use PNG com fundo transparente e formato
+  quadrado (ex.: 512×512 px). Ela aparece no topo do site, no rodapé e no
+  painel. Enquanto nenhuma logo for enviada, o site mostra um símbolo padrão
+  desenhado nas cores da marca — ou seja, o site nunca fica sem identidade.
+- **WhatsApp.** Ao alterar o número em Configurações, todos os botões do site
+  passam a usar o novo número automaticamente, com a mensagem já preenchida
+  com o nome do produto.
+
+### Cache
+
+As páginas públicas são atualizadas a cada 60 segundos. Depois de cadastrar um
+produto, ele pode levar até um minuto para aparecer no site — o painel sempre
+mostra o estado atual.
+
+---
+
+## Estrutura do código
+
+```
+src/
+├── app/
+│   ├── (site)/          páginas públicas (home, produtos, assistência, contato)
+│   └── admin/           painel administrativo protegido por login
+├── componentes/         componentes de interface reutilizáveis
+├── lib/                 clientes Supabase, consultas, tipos e formatação
+└── proxy.ts             protege /admin e mantém a sessão ativa
+supabase/schema.sql      script de criação do banco
+```
+
+Cores da marca (`src/app/globals.css`): azul `#2338db` e laranja `#f25c15`,
+retirados da logo.

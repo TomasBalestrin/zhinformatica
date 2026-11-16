@@ -1,26 +1,69 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =========================================================
+   ZH Informática — tokens de marca
+   Azul royal + laranja, extraídos da logo.
+   ========================================================= */
+@theme {
+  --color-zh-azul-50:  #eef2ff;
+  --color-zh-azul-100: #dde5ff;
+  --color-zh-azul-200: #bfcdff;
+  --color-zh-azul-300: #93a9ff;
+  --color-zh-azul-400: #6b83fb;
+  --color-zh-azul-500: #3f57ef;
+  --color-zh-azul-600: #2338db;
+  --color-zh-azul-700: #1c2bb8;
+  --color-zh-azul-800: #172494;
+  --color-zh-azul-900: #121b6e;
+  --color-zh-azul-950: #0b1044;
+
+  --color-zh-laranja-50:  #fff5ed;
+  --color-zh-laranja-100: #ffe8d4;
+  --color-zh-laranja-200: #ffcda8;
+  --color-zh-laranja-300: #ffa970;
+  --color-zh-laranja-400: #fd7b37;
+  --color-zh-laranja-500: #f25c15;
+  --color-zh-laranja-600: #e3420b;
+  --color-zh-laranja-700: #bc2f0b;
+  --color-zh-laranja-800: #952811;
+  --color-zh-laranja-900: #782411;
+
+  --color-zap: #25d366;
+  --color-zap-escuro: #1da851;
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f7fb;
+  color: #0f1222;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Esconde a barra de rolagem em carrosséis horizontais */
+.sem-barra::-webkit-scrollbar {
+  display: none;
+}
+.sem-barra {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes zh-sobe {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anima-sobe {
+  animation: zh-sobe 0.5s ease-out both;
 }
