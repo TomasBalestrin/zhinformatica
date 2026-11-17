@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { ImagePlus, Loader2, Trash2 } from "lucide-react";
-import { criarClienteNavegador } from "@/lib/supabase-browser";
+import { obterClienteNavegador } from "@/lib/supabase-browser";
 
 /**
  * Envia a imagem para o bucket público "midia" do Supabase Storage
@@ -37,7 +37,7 @@ export function UploadImagem({
     }
 
     setEnviando(true);
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     const extensao = arquivo.name.split(".").pop()?.toLowerCase() ?? "jpg";
     const caminho = `${pasta}/${crypto.randomUUID()}.${extensao}`;
 

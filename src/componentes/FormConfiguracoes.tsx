@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Check, Loader2, Save } from "lucide-react";
 import { AreaTexto, Campo, Entrada } from "./CamposAdmin";
 import { UploadImagem } from "./UploadImagem";
-import { criarClienteNavegador } from "@/lib/supabase-browser";
+import { obterClienteNavegador } from "@/lib/supabase-browser";
 import type { Config } from "@/lib/tipos";
 
 export function FormConfiguracoes({ config }: { config: Config }) {
@@ -32,7 +32,7 @@ export function FormConfiguracoes({ config }: { config: Config }) {
     setSalvando(true);
     setErro(null);
 
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     const linhas = Object.entries(valores).map(([chave, valor]) => ({
       chave,
       valor,

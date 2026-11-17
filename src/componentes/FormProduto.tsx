@@ -12,7 +12,7 @@ import {
   Interruptor,
   Selecao,
 } from "./CamposAdmin";
-import { criarClienteNavegador } from "@/lib/supabase-browser";
+import { obterClienteNavegador } from "@/lib/supabase-browser";
 import type { Categoria, Produto } from "@/lib/tipos";
 
 export function FormProduto({
@@ -61,7 +61,7 @@ export function FormProduto({
       ordem: Number(ordem) || 0,
     };
 
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     const { error } = produto
       ? await supabase.from("produtos").update(registro).eq("id", produto.id)
       : await supabase.from("produtos").insert(registro);

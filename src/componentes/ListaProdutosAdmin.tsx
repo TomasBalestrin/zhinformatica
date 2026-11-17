@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import { ImageOff, Pencil, Plus, Search, Star, Trash2 } from "lucide-react";
-import { criarClienteNavegador } from "@/lib/supabase-browser";
+import { obterClienteNavegador } from "@/lib/supabase-browser";
 import { formatarPreco } from "@/lib/formato";
 import type { Categoria, Produto } from "@/lib/tipos";
 
@@ -34,7 +34,7 @@ export function ListaProdutosAdmin({
       return;
 
     setApagando(produto.id);
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     const { error } = await supabase
       .from("produtos")
       .delete()

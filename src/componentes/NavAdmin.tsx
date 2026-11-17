@@ -11,7 +11,7 @@ import {
   Tags,
 } from "lucide-react";
 import { Logo } from "./Logo";
-import { criarClienteNavegador } from "@/lib/supabase-browser";
+import { obterClienteNavegador } from "@/lib/supabase-browser";
 
 const ITENS = [
   { href: "/admin", rotulo: "Painel", icone: LayoutDashboard },
@@ -32,7 +32,7 @@ export function NavAdmin({
   const router = useRouter();
 
   async function sair() {
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     await supabase.auth.signOut();
     router.push("/admin/login");
     router.refresh();

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Loader2, LockKeyhole } from "lucide-react";
 import { Logo } from "@/componentes/Logo";
-import { criarClienteNavegador } from "@/lib/supabase-browser";
+import { obterClienteNavegador } from "@/lib/supabase-browser";
 
 export default function PaginaLogin() {
   const router = useRouter();
@@ -16,12 +16,23 @@ export default function PaginaLogin() {
 
   // A logo é um dado público — buscamos direto para a tela não ficar genérica.
   useEffect(() => {
-    criarClienteNavegador()
-      .from("configuracoes")
-      .select("valor")
-      .eq("chave", "logo")
-      .maybeSingle()
-      .then(({ data }) => setLogo(data?.valor || null));
+    let ativo = true;
+    (async () => {
+      try {
+        const supabase = await obterClienteNavegador();
+        const { data } = await supabase
+          .from("configuracoes")
+          .select("valor")
+          .eq("chave", "logo")
+          .maybeSingle();
+        if (ativo) setLogo(data?.valor || null);
+      } catch {
+        // Sem logo o símbolo padrão é usado; não vale quebrar o login por isso.
+      }
+    })();
+    return () => {
+      ativo = false;
+    };
   }, []);
 
   async function entrar(e: React.FormEvent) {
@@ -29,7 +40,7 @@ export default function PaginaLogin() {
     setCarregando(true);
     setErro(null);
 
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password: senha,

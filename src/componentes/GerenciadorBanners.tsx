@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Loader2, Plus, Save, Trash2, X } from "lucide-react";
 import { UploadImagem } from "./UploadImagem";
 import { Campo, Entrada, Interruptor } from "./CamposAdmin";
-import { criarClienteNavegador } from "@/lib/supabase-browser";
+import { obterClienteNavegador } from "@/lib/supabase-browser";
 import type { Banner } from "@/lib/tipos";
 
 export function GerenciadorBanners({ banners }: { banners: Banner[] }) {
@@ -15,13 +15,13 @@ export function GerenciadorBanners({ banners }: { banners: Banner[] }) {
 
   async function apagar(banner: Banner) {
     if (!confirm("Excluir este banner?")) return;
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     await supabase.from("banners").delete().eq("id", banner.id);
     router.refresh();
   }
 
   async function alternarAtivo(banner: Banner) {
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     await supabase
       .from("banners")
       .update({ ativo: !banner.ativo })
@@ -154,7 +154,7 @@ function ModalBanner({
       ordem: Number(ordem) || 0,
     };
 
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     const { error } = banner
       ? await supabase.from("banners").update(registro).eq("id", banner.id)
       : await supabase.from("banners").insert(registro);

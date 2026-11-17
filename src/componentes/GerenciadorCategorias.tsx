@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 import { Entrada } from "./CamposAdmin";
-import { criarClienteNavegador } from "@/lib/supabase-browser";
+import { obterClienteNavegador } from "@/lib/supabase-browser";
 import type { Categoria } from "@/lib/tipos";
 
 /** Transforma "PS5 & Gamer" em "ps5-gamer". */
@@ -35,7 +35,7 @@ export function GerenciadorCategorias({
     setSalvando(true);
     setErro(null);
 
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     const { error } = await supabase.from("categorias").insert({
       nome: limpo,
       slug: gerarSlug(limpo),
@@ -61,13 +61,13 @@ export function GerenciadorCategorias({
     )
       return;
 
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     await supabase.from("categorias").delete().eq("id", categoria.id);
     router.refresh();
   }
 
   async function salvarOrdem(categoria: Categoria, valor: string) {
-    const supabase = criarClienteNavegador();
+    const supabase = await obterClienteNavegador();
     await supabase
       .from("categorias")
       .update({ ordem: Number(valor) || 0 })
