@@ -33,6 +33,24 @@ deve ter 10 linhas.
 
 ---
 
+## 1.1 Conferir o bucket de imagens
+
+No Supabase, menu lateral → **Storage**. Deve existir um bucket chamado
+**`midia`**.
+
+Se **não** existir, o SQL Editor não teve permissão para criá-lo — acontece em
+alguns projetos. Crie pela interface:
+
+**Storage → New bucket** → nome `midia` → marque **Public bucket** → **Save**
+
+Depois rode [`supabase/storage.sql`](supabase/storage.sql) no SQL Editor para
+aplicar as permissões.
+
+> Sem o bucket, tudo funciona menos o envio de imagens: cadastrar produto,
+> banner ou logo falha na hora do upload.
+
+---
+
 ## 2. Criar o login do dono
 
 1. Menu lateral → **Authentication** → **Users**.
@@ -172,7 +190,7 @@ cadastra produto pelo celular, se quiser.
 | Login recusa a senha certa | O usuário foi criado sem **Auto Confirm**. Apague e refaça o passo 2. |
 | Páginas levam ~7 segundos | `.env.local` ainda com valores de exemplo. Refaça o passo 3 e reinicie o `npm run dev`. |
 | Site sem produtos nem categorias | O `schema.sql` não rodou. Volte ao passo 1. |
-| Erro ao enviar imagem | O bucket `midia` não existe — rode o `schema.sql` de novo. |
+| Erro ao enviar imagem | O bucket `midia` não existe. Veja o passo 1.1 — pode ser preciso criá-lo pela interface do Storage. |
 | Imagem não carrega depois de enviada | Reinicie o `npm run dev`: o domínio do Supabase é lido na inicialização. Na Vercel, faça **Redeploy**. |
 | Na Vercel o site sobe vazio | Variáveis faltando, com espaço no fim, ou adicionadas sem **Redeploy**. Veja o passo 6.4. |
 | **"This page couldn't load / A server error occurred"** | As duas variáveis não chegaram ao deploy. O build passa mesmo sem elas, por isso a Vercel não acusa erro — a falha só aparece ao abrir a página. Confira em **Logs** na Vercel: a mensagem diz qual variável falta. Adicione no passo 6.3 e **faça Redeploy**. |
