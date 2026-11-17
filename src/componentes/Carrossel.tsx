@@ -6,7 +6,14 @@ import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Banner } from "@/lib/tipos";
 
-export function Carrossel({ banners }: { banners: Banner[] }) {
+export function Carrossel({
+  banners,
+  proporcoes,
+}: {
+  banners: Banner[];
+  /** largura ÷ altura do banner mais alto, por tela; a moldura se ajusta a ele */
+  proporcoes?: { desktop: number | null; mobile: number | null };
+}) {
   const [indice, setIndice] = useState(0);
   const total = banners.length;
 
@@ -25,17 +32,37 @@ export function Carrossel({ banners }: { banners: Banner[] }) {
 
   return (
     <section className="relative mx-auto max-w-7xl px-4 pt-6">
-      <div className="relative aspect-[16/7] overflow-hidden rounded-3xl bg-zh-azul-900 sm:aspect-[21/8]">
+      <div
+        className="zh-moldura relative overflow-hidden rounded-3xl bg-zh-azul-900"
+        style={
+          {
+            "--zh-mobile": `${proporcoes?.mobile ?? 16 / 9}`,
+            "--zh-desktop": `${proporcoes?.desktop ?? 21 / 8}`,
+          } as React.CSSProperties
+        }
+      >
         {banners.map((b, i) => {
           const conteudo = (
             <>
+              {b.imagem_mobile_url && (
+                <Image
+                  src={b.imagem_mobile_url}
+                  alt={b.titulo ?? "Banner ZH Informática"}
+                  fill
+                  priority={i === 0}
+                  sizes="100vw"
+                  className="object-contain sm:hidden"
+                />
+              )}
               <Image
                 src={b.imagem_url}
                 alt={b.titulo ?? "Banner ZH Informática"}
                 fill
                 priority={i === 0}
                 sizes="(max-width: 1280px) 100vw, 1280px"
-                className="object-cover"
+                className={`object-contain ${
+                  b.imagem_mobile_url ? "hidden sm:block" : ""
+                }`}
               />
               {(b.titulo || b.subtitulo) && (
                 <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-zh-azul-950/85 via-zh-azul-950/25 to-transparent p-5 sm:p-10">

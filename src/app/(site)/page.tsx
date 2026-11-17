@@ -15,7 +15,13 @@ import {
 } from "lucide-react";
 import { Carrossel } from "@/componentes/Carrossel";
 import { CardProduto } from "@/componentes/CardProduto";
-import { buscarBanners, buscarCategorias, buscarConfig, buscarProdutos } from "@/lib/dados";
+import {
+  buscarBanners,
+  buscarCategorias,
+  buscarConfig,
+  buscarProdutos,
+  proporcoesDosBanners,
+} from "@/lib/dados";
 import { linkWhatsApp } from "@/lib/formato";
 
 export const revalidate = 60;
@@ -43,11 +49,12 @@ export default async function Home() {
   ]);
 
   const vitrine = destaques.length > 0 ? destaques : recentes;
+  const proporcoesBanner = await proporcoesDosBanners(banners);
 
   return (
     <>
       {banners.length > 0 ? (
-        <Carrossel banners={banners} />
+        <Carrossel banners={banners} proporcoes={proporcoesBanner} />
       ) : (
         <HeroPadrao whatsapp={config.whatsapp} />
       )}

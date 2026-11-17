@@ -109,8 +109,10 @@ Entre no painel com o e-mail e a senha do passo 2.
 2. **Produtos** → **Novo produto**: foto, nome, preço (pode deixar vazio para
    exibir "Consulte o valor") e categoria. Marque **Mostrar em destaque** nos
    que devem aparecer na página inicial.
-3. **Banners** → **Novo banner**: imagem de **1600×600 px** para o carrossel da
-   home.
+3. **Banners** → **Novo banner**: envie a imagem de **computador** (deitada,
+   ~1600×600 px) e, se quiser, a de **celular** (em pé, ~900×1100 px). Sem a de
+   celular, o telefone usa a imagem deitada — ela aparece inteira, mas pequena
+   e com o texto difícil de ler.
 
 > As páginas públicas têm cache de 60 segundos. Depois de cadastrar, pode levar
 > até um minuto para o produto aparecer no site — o painel mostra na hora.

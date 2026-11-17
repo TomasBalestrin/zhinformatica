@@ -129,6 +129,9 @@ function ModalBanner({
   const [titulo, setTitulo] = useState(banner?.titulo ?? "");
   const [subtitulo, setSubtitulo] = useState(banner?.subtitulo ?? "");
   const [imagem, setImagem] = useState<string | null>(banner?.imagem_url ?? null);
+  const [imagemMobile, setImagemMobile] = useState<string | null>(
+    banner?.imagem_mobile_url ?? null
+  );
   const [link, setLink] = useState(banner?.link ?? "");
   const [ativo, setAtivo] = useState(banner?.ativo ?? true);
   const [ordem, setOrdem] = useState(String(banner?.ordem ?? 0));
@@ -149,6 +152,7 @@ function ModalBanner({
       titulo: titulo.trim() || null,
       subtitulo: subtitulo.trim() || null,
       imagem_url: imagem,
+      imagem_mobile_url: imagemMobile,
       link: link.trim() || null,
       ativo,
       ordem: Number(ordem) || 0,
@@ -192,8 +196,11 @@ function ModalBanner({
 
         <div className="mt-5 grid gap-4">
           <div>
-            <p className="mb-2 text-xs font-bold uppercase tracking-wider text-zh-azul-400">
-              Imagem do banner
+            <p className="text-xs font-bold uppercase tracking-wider text-zh-azul-400">
+              Imagem para computador
+            </p>
+            <p className="mb-2 mt-1 text-[11px] text-zh-azul-900/45">
+              Formato deitado. Recomendado: 1600×600 px.
             </p>
             <UploadImagem
               valor={imagem}
@@ -201,6 +208,24 @@ function ModalBanner({
               pasta="banners"
               proporcao="aspect-[21/8]"
             />
+          </div>
+
+          <div>
+            <p className="text-xs font-bold uppercase tracking-wider text-zh-azul-400">
+              Imagem para celular
+            </p>
+            <p className="mb-2 mt-1 text-[11px] text-zh-azul-900/45">
+              Opcional, em formato vertical. Recomendado: 900×1100 px. Sem ela,
+              o celular usa a imagem de computador.
+            </p>
+            <div className="max-w-[200px]">
+              <UploadImagem
+                valor={imagemMobile}
+                aoMudar={setImagemMobile}
+                pasta="banners"
+                proporcao="aspect-[9/11]"
+              />
+            </div>
           </div>
 
           <Campo rotulo="Título" dica="Opcional — aparece sobre a imagem.">

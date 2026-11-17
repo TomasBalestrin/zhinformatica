@@ -34,7 +34,8 @@ create table if not exists public.banners (
   id          uuid primary key default gen_random_uuid(),
   titulo      text,
   subtitulo   text,
-  imagem_url  text not null,
+  imagem_url  text not null,            -- imagem larga (desktop)
+  imagem_mobile_url text,                -- opcional: imagem vertical p/ celular
   link        text,                        -- opcional: destino ao clicar
   ativo       boolean not null default true,
   ordem       int not null default 0,

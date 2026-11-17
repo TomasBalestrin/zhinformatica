@@ -24,6 +24,7 @@ export type Banner = {
   titulo: string | null;
   subtitulo: string | null;
   imagem_url: string;
+  imagem_mobile_url: string | null;
   link: string | null;
   ativo: boolean;
   ordem: number;

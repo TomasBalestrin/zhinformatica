@@ -67,3 +67,19 @@ body {
 .anima-sobe {
   animation: zh-sobe 0.5s ease-out both;
 }
+
+/* Moldura do carrossel: acompanha a proporção da imagem enviada, para que
+   o banner apareça inteiro, usando a versão de celular até 640px e a de
+   computador acima disso. O teto de altura evita que um banner muito alto
+   tome a tela toda e empurre o restante da página para baixo. */
+.zh-moldura {
+  aspect-ratio: var(--zh-mobile);
+  max-height: 65vh;
+}
+
+@media (min-width: 640px) {
+  .zh-moldura {
+    aspect-ratio: var(--zh-desktop);
+    max-height: 72vh;
+  }
+}

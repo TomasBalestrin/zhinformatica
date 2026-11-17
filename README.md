@@ -95,8 +95,12 @@ Acesse `/admin` e entre com o e-mail e a senha criados no passo 3.
 - **Destaque.** Produtos marcados como destaque aparecem na página inicial. Se
   nenhum estiver marcado, a home mostra os cadastrados mais recentes.
 - **Ordem.** Número menor aparece primeiro na listagem.
-- **Banners.** Tamanho recomendado: **1600×600 px**. O campo "Link ao clicar"
-  aceita caminhos internos, como `/produtos?categoria=gamer`.
+- **Banners.** Cada banner aceita **duas imagens**: uma para computador
+  (deitada, ~1600×600 px) e outra para celular (em pé, ~900×1100 px). A de
+  celular é opcional — sem ela, o telefone usa a de computador. O campo
+  "Link ao clicar" aceita caminhos internos, como `/produtos?categoria=gamer`.
+- **O banner nunca é cortado.** A moldura se ajusta à proporção da imagem
+  enviada, então ele aparece inteiro, seja qual for o formato.
 - **Imagens.** Até 5 MB por arquivo, em JPG, PNG ou WEBP.
 - **Logo.** Enviada em Configurações. Use PNG com fundo transparente e formato
   quadrado (ex.: 512×512 px). Ela aparece no topo do site, no rodapé e no
