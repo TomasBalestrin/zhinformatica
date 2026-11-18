@@ -73,13 +73,20 @@ body {
    computador acima disso. O teto de altura evita que um banner muito alto
    tome a tela toda e empurre o restante da página para baixo. */
 .zh-moldura {
+  /* A largura manda: a altura é que decorre da proporção da imagem.
+     Sem isto, a proporção pode esticar a caixa além do container e o
+     banner vaza para fora da tela. */
+  width: 100%;
+  max-width: 100%;
   aspect-ratio: var(--zh-mobile);
-  max-height: 65vh;
 }
 
 @media (min-width: 640px) {
   .zh-moldura {
     aspect-ratio: var(--zh-desktop);
+    /* Teto só no desktop: lá a imagem é deitada e um banner muito alto
+       tomaria a tela toda. No celular a imagem é vertical por natureza,
+       e limitar a altura encolheria a largura, deixando sobra nas laterais. */
     max-height: 72vh;
   }
 }

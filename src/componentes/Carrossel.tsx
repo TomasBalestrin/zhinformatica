@@ -51,7 +51,7 @@ export function Carrossel({
                   fill
                   priority={i === 0}
                   sizes="100vw"
-                  className="object-contain sm:hidden"
+                  className="object-cover sm:hidden"
                 />
               )}
               <Image

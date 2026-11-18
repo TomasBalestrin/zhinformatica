@@ -3,7 +3,16 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Loader2, Plus, Save, Trash2, X } from "lucide-react";
+import {
+  ImageOff,
+  Loader2,
+  Monitor,
+  Plus,
+  Save,
+  Smartphone,
+  Trash2,
+  X,
+} from "lucide-react";
 import { UploadImagem } from "./UploadImagem";
 import { Campo, Entrada, Interruptor } from "./CamposAdmin";
 import { obterClienteNavegador } from "@/lib/supabase-browser";
@@ -55,14 +64,45 @@ export function GerenciadorBanners({ banners }: { banners: Banner[] }) {
             key={b.id}
             className="overflow-hidden rounded-2xl border border-zh-azul-100 bg-white"
           >
-            <div className="relative aspect-[21/8] bg-zh-azul-50">
-              <Image
-                src={b.imagem_url}
-                alt={b.titulo ?? "Banner"}
-                fill
-                sizes="(max-width: 896px) 100vw, 896px"
-                className="object-cover"
-              />
+            <div className="flex flex-col gap-3 bg-zh-azul-50/40 p-3 sm:flex-row">
+              <figure className="min-w-0 flex-1">
+                <figcaption className="mb-1.5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-zh-azul-400">
+                  <Monitor className="size-3.5" /> Computador
+                </figcaption>
+                <div className="relative aspect-[21/8] overflow-hidden rounded-xl bg-white">
+                  <Image
+                    src={b.imagem_url}
+                    alt={`${b.titulo ?? "Banner"} — versão para computador`}
+                    fill
+                    sizes="(max-width: 896px) 100vw, 600px"
+                    className="object-contain"
+                  />
+                </div>
+              </figure>
+
+              <figure className="w-full shrink-0 sm:w-40">
+                <figcaption className="mb-1.5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-zh-azul-400">
+                  <Smartphone className="size-3.5" /> Celular
+                </figcaption>
+                <div className="relative aspect-[9/11] overflow-hidden rounded-xl bg-white">
+                  {b.imagem_mobile_url ? (
+                    <Image
+                      src={b.imagem_mobile_url}
+                      alt={`${b.titulo ?? "Banner"} — versão para celular`}
+                      fill
+                      sizes="160px"
+                      className="object-contain"
+                    />
+                  ) : (
+                    <div className="flex h-full flex-col items-center justify-center gap-1 px-2 text-center">
+                      <ImageOff className="size-5 text-zh-azul-200" />
+                      <span className="text-[10px] leading-tight text-zh-azul-900/45">
+                        Sem imagem própria — usa a de computador
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </figure>
             </div>
             <div className="flex flex-wrap items-center gap-3 p-4">
               <div className="min-w-0 flex-1">
