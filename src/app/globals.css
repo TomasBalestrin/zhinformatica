@@ -39,9 +39,34 @@ html {
 }
 
 body {
-  background: #f6f7fb;
-  color: #0f1222;
+  /* Catálogo: fundo branco, o produto é que dá cor à página. */
+  background: #ffffff;
+  color: #1a1a1a;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Faixa cinza que separa os blocos de catálogo, como nas lojas da Xiaomi. */
+.faixa-cinza {
+  background: #f5f5f5;
+}
+
+/* Card de produto: sem borda em repouso, a sombra aparece no hover. */
+.card-produto {
+  background: #fff;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-produto:hover {
+  box-shadow: 0 2px 20px rgb(0 0 0 / 0.12);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-produto,
+  .card-produto:hover {
+    transform: none;
+    transition: box-shadow 0.25s ease;
+  }
 }
 
 /* Esconde a barra de rolagem em carrosséis horizontais */

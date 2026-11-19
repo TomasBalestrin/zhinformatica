@@ -18,7 +18,7 @@ const SERVICOS = [
   {
     icone: Smartphone,
     titulo: "Troca de tela",
-    texto: "iPhone, Xiaomi, Samsung e Motorola com peças de qualidade.",
+    texto: "iPhone, Xiaomi, Samsung e Motorola, com peças de qualidade.",
   },
   {
     icone: BatteryCharging,
@@ -33,7 +33,7 @@ const SERVICOS = [
   {
     icone: HardDrive,
     titulo: "Upgrade de SSD e memória",
-    texto: "Deixe seu notebook muito mais rápido com SSD e mais RAM.",
+    texto: "Seu notebook fica muito mais rápido com SSD e mais RAM.",
   },
   {
     icone: Printer,
@@ -65,65 +65,69 @@ export default async function PaginaAssistencia() {
   );
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10">
-      <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-zh-azul-700 to-zh-azul-950 p-8 sm:p-14">
-        <span className="inline-flex items-center gap-2 rounded-full bg-zh-laranja-500/20 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-zh-laranja-300">
-          <Wrench className="size-3.5" /> Assistência técnica
-        </span>
-        <h1 className="mt-4 max-w-2xl text-3xl font-extrabold leading-tight text-white sm:text-4xl">
-          Conserto rápido, honesto e com garantia.
-        </h1>
-        <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/75">
-          Trabalhamos com celulares, notebooks, computadores, impressoras e
-          consoles. Diagnóstico e orçamento sem compromisso — você só aprova se
-          concordar com o valor.
-        </p>
-        <a
-          href={zap}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-7 inline-block rounded-full bg-zap px-6 py-3 text-sm font-bold text-white transition hover:bg-zap-escuro"
-        >
-          Pedir orçamento no WhatsApp
-        </a>
-      </div>
-
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {SERVICOS.map((s) => (
-          <div
-            key={s.titulo}
-            className="rounded-2xl border border-zh-azul-100 bg-white p-5 transition hover:-translate-y-1 hover:shadow-md"
+    <>
+      <section className="bg-zh-azul-800">
+        <div className="mx-auto max-w-[1226px] px-4 py-20 text-center">
+          <p className="text-[12px] font-medium uppercase tracking-[0.12em] text-zh-laranja-400">
+            Assistência técnica
+          </p>
+          <h1 className="mx-auto mt-4 max-w-2xl text-[32px] font-medium leading-tight text-white sm:text-[42px]">
+            Conserto rápido, honesto e com garantia.
+          </h1>
+          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-white/70">
+            Celulares, notebooks, computadores, impressoras e consoles. O
+            diagnóstico é gratuito e o orçamento sai antes do conserto — você só
+            aprova se concordar com o valor.
+          </p>
+          <a
+            href={zap}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-9 inline-block bg-zh-laranja-500 px-7 py-3 text-[14px] font-medium text-white transition hover:bg-zh-laranja-600"
           >
-            <span className="grid size-11 place-items-center rounded-xl bg-zh-azul-50 text-zh-azul-600">
-              <s.icone className="size-5" />
-            </span>
-            <h2 className="mt-4 text-sm font-bold text-zh-azul-950">
-              {s.titulo}
-            </h2>
-            <p className="mt-1.5 text-xs leading-relaxed text-zh-azul-900/60">
-              {s.texto}
-            </p>
-          </div>
-        ))}
-      </div>
+            Pedir orçamento
+          </a>
+        </div>
+      </section>
 
-      <div className="mt-10 rounded-3xl border border-zh-azul-100 bg-white p-8 text-center">
-        <h2 className="text-xl font-extrabold text-zh-azul-950">
+      <section className="faixa-cinza">
+        <div className="mx-auto max-w-[1226px] px-4 py-10">
+          <h2 className="mb-5 text-[22px] font-medium text-zinc-900">
+            O que fazemos
+          </h2>
+          <div className="grid grid-cols-2 gap-px bg-zinc-100 lg:grid-cols-4">
+            {SERVICOS.map((s) => (
+              <div key={s.titulo} className="bg-white px-6 py-9">
+                <s.icone className="size-7 text-zh-laranja-500" />
+                <h3 className="mt-5 text-[15px] font-medium text-zinc-900">
+                  {s.titulo}
+                </h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-zinc-500">
+                  {s.texto}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1226px] px-4 py-16 text-center">
+        <h2 className="text-[24px] font-medium text-zinc-900">
           Não achou o serviço que precisa?
         </h2>
-        <p className="mx-auto mt-2 max-w-lg text-sm text-zh-azul-900/60">
-          Chame no WhatsApp e descreva o problema. Respondemos rápido no horário
+        <p className="mx-auto mt-3 max-w-lg text-[15px] leading-relaxed text-zinc-600">
+          Descreva o problema no WhatsApp. Um técnico responde no horário
           comercial.
         </p>
         <a
           href={zap}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 inline-block rounded-full bg-zap px-6 py-3 text-sm font-bold text-white transition hover:bg-zap-escuro"
+          className="mt-7 inline-block bg-zh-laranja-500 px-7 py-3 text-[14px] font-medium text-white transition hover:bg-zh-laranja-600"
         >
           Falar com um técnico
         </a>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }

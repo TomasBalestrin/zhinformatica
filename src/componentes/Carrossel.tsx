@@ -31,9 +31,9 @@ export function Carrossel({
   if (total === 0) return null;
 
   return (
-    <section className="relative mx-auto max-w-7xl px-4 pt-6">
+    <section className="relative mx-auto max-w-[1226px] px-4 pt-4">
       <div
-        className="zh-moldura relative overflow-hidden rounded-3xl bg-zh-azul-900"
+        className="zh-moldura relative overflow-hidden bg-zinc-100"
         style={
           {
             "--zh-mobile": `${proporcoes?.mobile ?? 16 / 9}`,
