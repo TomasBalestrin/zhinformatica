@@ -239,8 +239,9 @@ function ModalBanner({
             <p className="text-xs font-bold uppercase tracking-wider text-zh-azul-400">
               Imagem para computador
             </p>
-            <p className="mb-2 mt-1 text-[11px] text-zh-azul-900/45">
-              Formato deitado. Recomendado: 1600×600 px.
+            <p className="mb-2 mt-1 text-[11px] leading-relaxed text-zh-azul-900/45">
+              Formato deitado, por volta de 1600×600 px. Outras medidas também
+              funcionam: o banner aparece inteiro, sem corte.
             </p>
             <UploadImagem
               valor={imagem}
@@ -254,9 +255,10 @@ function ModalBanner({
             <p className="text-xs font-bold uppercase tracking-wider text-zh-azul-400">
               Imagem para celular
             </p>
-            <p className="mb-2 mt-1 text-[11px] text-zh-azul-900/45">
-              Opcional, em formato vertical. Recomendado: 900×1100 px. Sem ela,
-              o celular usa a imagem de computador.
+            <p className="mb-2 mt-1 text-[11px] leading-relaxed text-zh-azul-900/45">
+              Opcional, em formato vertical — por volta de 900×1100 px. Sem ela,
+              o celular usa a imagem de computador, que fica pequena e com o
+              texto difícil de ler.
             </p>
             <div className="max-w-[200px]">
               <UploadImagem

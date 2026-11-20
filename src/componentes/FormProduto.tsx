@@ -92,8 +92,12 @@ export function FormProduto({
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[260px_1fr]">
         <div>
-          <p className="mb-2 text-xs font-bold uppercase tracking-wider text-zh-azul-400">
+          <p className="text-xs font-bold uppercase tracking-wider text-zh-azul-400">
             Foto do produto
+          </p>
+          <p className="mb-2 mt-1 text-[11px] leading-relaxed text-zh-azul-900/45">
+            Quadrada, por volta de 800×800 px. Fundo branco ou transparente
+            deixa a vitrine uniforme, já que as fotos aparecem lado a lado.
           </p>
           <UploadImagem valor={imagem} aoMudar={setImagem} pasta="produtos" />
         </div>
